@@ -1,51 +1,24 @@
-package com.example.jobpostingboard_api.entity;
-import jakarta.persistence.*;
+package com.example.jobpostingboard_api.dto;
 
-import java.util.HashSet;
-import java.util.Set;
 
-@Entity
-public class Company {
+public class CompanyRequestDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "name")
     private String name;
-    @Column(name = "userName")
+
     private String userName;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "contactNumber")
     private String contactNumber;
 
-    @Column(name = "industry")
     private String industry;
 
-    @Column(name = "website")
     private String website;
 
-    @Column(name = "logo")
     private String logo;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
+    private int addressID;
 
-    @OneToMany(mappedBy = "company")
-    private Set<JobPost> jobPostings = new HashSet<>();
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -70,7 +43,6 @@ public class Company {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public String getContactNumber() {
         return contactNumber;
@@ -104,19 +76,12 @@ public class Company {
         this.logo = logo;
     }
 
-    public Address getAddress() {
-        return address;
+    public int getAddressID() {
+        return addressID;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Set<JobPost> getJobPostings() {
-        return jobPostings;
-    }
-
-    public void setJobPostings(Set<JobPost> jobPostings) {
-        this.jobPostings = jobPostings;
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
     }
 }
+
