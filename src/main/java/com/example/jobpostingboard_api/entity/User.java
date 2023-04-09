@@ -1,5 +1,6 @@
 package com.example.jobpostingboard_api.entity;
-import com.example.jobpostingboardapi.enums.UserRoles;
+
+import com.example.jobpostingboard_api.enums.UserRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +35,7 @@ public class User  implements UserDetails {
     private String lastName;
     @Column
     private String password;
-    @Column
+    @Column(unique = true)
     private String emailAddress;
 
     @Enumerated(EnumType.STRING)
@@ -127,6 +128,35 @@ public class User  implements UserDetails {
         this.userRole = userRole;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Application> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(Set<Application> applications) {
+        this.applications = applications;
+    }
 }

@@ -1,15 +1,22 @@
 package com.example.jobpostingboard_api.auth;
 
 
-import com.example.jobpostingboardapi.configuration.JwtService;
-import com.example.jobpostingboardapi.entity.User;
-import com.example.jobpostingboardapi.enums.UserRoles;
-import com.example.jobpostingboardapi.repository.UserRepository;
+
+import com.example.jobpostingboard_api.configuration.JwtService;
+import com.example.jobpostingboard_api.entity.Address;
+import com.example.jobpostingboard_api.entity.User;
+import com.example.jobpostingboard_api.enums.UserRoles;
+import com.example.jobpostingboard_api.repository.AddressRepository;
+import com.example.jobpostingboard_api.repository.UserRepository;
+import com.example.jobpostingboard_api.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +27,12 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    private final AddressService addressService;
+
     public AuthenticationResponse register(RegisterRequest request) {
+
+       Address address = addressService.findAddressById(request.getAddressId());
+        System.out.println(address);
 
         var user  = User.builder()
                 .firstName(request.getFirstName())
@@ -29,6 +41,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .contactNumber(request.getContactNumber())
                 .userRole(UserRoles.APPLICANT)
+                .address(address)
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

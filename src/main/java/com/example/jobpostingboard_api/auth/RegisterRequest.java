@@ -16,4 +16,13 @@ public class RegisterRequest {
     private String emailAddress;
     private String password;
     private String contactNumber;
+    private int addressId;
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
 }

@@ -1,26 +1,10 @@
-package com.example.jobpostingboard_api.entity;
+package com.example.jobpostingboard_api.dto;
 
-
-import jakarta.persistence.*;
-
-@Entity
-public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+public class AddressRequestDto {
     private String street;
     private String city;
     private String state;
     private String zipCode;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getStreet() {
         return street;
@@ -53,6 +37,4 @@ public class Address {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-
-
 }

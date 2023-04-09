@@ -1,5 +1,5 @@
 package com.example.jobpostingboard_api.entity;
-import com.example.jobpostingboardapi.enums.JobStatus;
+import com.example.jobpostingboard_api.enums.JobStatus;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
