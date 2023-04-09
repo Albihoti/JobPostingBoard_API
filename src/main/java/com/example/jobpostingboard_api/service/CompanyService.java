@@ -2,7 +2,6 @@ package com.example.jobpostingboard_api.service;
 
 
 import com.example.jobpostingboard_api.dto.CompanyRequestDto;
-import com.example.jobpostingboard_api.dto.CompanyResponseDto;
 import com.example.jobpostingboard_api.entity.Address;
 import com.example.jobpostingboard_api.entity.Company;
 import com.example.jobpostingboard_api.repository.CompanyRepository;

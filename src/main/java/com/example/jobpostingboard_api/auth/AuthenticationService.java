@@ -29,12 +29,13 @@ public class AuthenticationService {
 
     private final AddressService addressService;
 
+
     public AuthenticationResponse register(RegisterRequest request) {
 
-       Address address = addressService.findAddressById(request.getAddressId());
-        System.out.println(address);
+        Address address = addressService.findAddressById(request.getAddressId());
 
-        var user  = User.builder()
+
+        var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .emailAddress(request.getEmailAddress())
@@ -56,4 +57,6 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
+
+
 }
