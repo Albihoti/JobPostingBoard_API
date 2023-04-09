@@ -1,4 +1,4 @@
-package com.example.jobpostingboardapi.entity;
+package com.example.jobpostingboard_api.entity;
 
 
 import jakarta.persistence.*;

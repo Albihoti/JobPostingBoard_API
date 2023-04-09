@@ -1,4 +1,4 @@
-package com.example.jobpostingboardapi.entity;
+package com.example.jobpostingboard_api.entity;
 import com.example.jobpostingboardapi.enums.UserRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
