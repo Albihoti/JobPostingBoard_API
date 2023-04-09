@@ -41,7 +41,7 @@ public class AuthenticationService {
                 .emailAddress(request.getEmailAddress())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .contactNumber(request.getContactNumber())
-                .userRole(UserRoles.APPLICANT)
+                .userRole(UserRoles.ADMIN)
                 .address(address)
                 .build();
         userRepository.save(user);
