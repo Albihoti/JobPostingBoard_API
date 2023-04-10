@@ -6,6 +6,7 @@ import com.example.jobpostingboard_api.dto.UserDto;
 import com.example.jobpostingboard_api.entity.User;
 import com.example.jobpostingboard_api.enums.UserRoles;
 import com.example.jobpostingboard_api.service.UserService;
+import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Role;
@@ -18,6 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/user")
 @RequiredArgsConstructor
+@Api(
+        tags = {"Users"},
+        value = "User management operation"
+)
 public class UserController {
 
         private final UserService userService;

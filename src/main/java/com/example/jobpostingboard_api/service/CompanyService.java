@@ -6,7 +6,10 @@ import com.example.jobpostingboard_api.entity.Address;
 import com.example.jobpostingboard_api.entity.Company;
 import com.example.jobpostingboard_api.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +38,39 @@ public class CompanyService {
 
 
         return company;
+    }
+
+    public List<Company> getAll() {
+        return companyRepository.findAll();
+
+    }
+
+    public Company getCompanyById(int id) {
+
+        return  companyRepository.findById(id).orElse(null);
+
+    }
+
+    public CompanyRequestDto updateCompanyById(int id, CompanyRequestDto companyRequestDto) {
+        var company = getCompanyById(id);
+
+        company.setName(companyRequestDto.getName());
+        company.setUserName(companyRequestDto.getUserName());
+        company.setWebsite(companyRequestDto.getWebsite());
+        company.setContactNumber(companyRequestDto.getContactNumber());
+        company.setIndustry(companyRequestDto.getIndustry());
+        company.setLogo(companyRequestDto.getLogo());
+
+        companyRepository.save(company);
+
+        return  companyRequestDto;
+
+    }
+
+    public String deleteCompanyById(int id) {
+        var company = getCompanyById(id);
+        companyRepository.delete(company);
+        return "Company deleted succesfully";
+
     }
 }
