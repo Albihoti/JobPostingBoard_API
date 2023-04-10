@@ -19,15 +19,20 @@ public class AddressService {
 
 
     public Address addNewAddress(AddressRequestDto addressRequestDto) {
-        var address = new Address();
-        address.setCity(addressRequestDto.getCity());
-        address.setState(addressRequestDto.getState());
-        address.setStreet(addressRequestDto.getStreet());
-        address.setZipCode(addressRequestDto.getZipCode());
+        try{
+            var address = new Address();
+            address.setCity(addressRequestDto.getCity());
+            address.setState(addressRequestDto.getState());
+            address.setStreet(addressRequestDto.getStreet());
+            address.setZipCode(addressRequestDto.getZipCode());
 
-        addressRepository.save(address);
+            addressRepository.save(address);
+            return address;
+        }
+        catch (Exception e){
+            return null;
+        }
 
-        return address;
 
     }
 
@@ -40,14 +45,27 @@ public class AddressService {
     }
 
     public Address updateAddressById(int id, AddressRequestDto addressRequestDto) {
-        var address = findAddressById(id);
-        address.setZipCode(addressRequestDto.getZipCode());
-        address.setStreet(addressRequestDto.getStreet());
-        address.setState(addressRequestDto.getState());
-        address.setCity(addressRequestDto.getCity());
 
-        addressRepository.save(address);
-        return address;
+        var address = findAddressById(id);
+        if(address != null){
+            try {
+                address.setZipCode(addressRequestDto.getZipCode());
+                address.setStreet(addressRequestDto.getStreet());
+                address.setState(addressRequestDto.getState());
+                address.setCity(addressRequestDto.getCity());
+
+                addressRepository.save(address);
+                return address;
+            }
+            catch (Exception e){
+                return null;
+            }
+
+        }
+        else{
+            return null;
+        }
+
     }
 
     public String deleteAddressById(int id) {
