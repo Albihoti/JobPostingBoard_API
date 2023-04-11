@@ -1,38 +1,41 @@
 package com.example.jobpostingboard_api.controller;
 
 
-import com.example.jobpostingboard_api.auth.AuthenticationService;
+
 import com.example.jobpostingboard_api.dto.UserDto;
 import com.example.jobpostingboard_api.entity.User;
-import com.example.jobpostingboard_api.enums.UserRoles;
 import com.example.jobpostingboard_api.service.UserService;
-import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/user")
 @RequiredArgsConstructor
-@Api(
-        tags = {"Users"},
-        value = "User management operation"
-)
 public class UserController {
 
         private final UserService userService;
 
 
-    @GetMapping("/me")
+    @GetMapping("/profile/me")
     public ResponseEntity<UserDto> getUserByToken(HttpServletRequest request){
 
+        if(userService.getMe(request)!=null){
+            return ResponseEntity.ok(userService.getMe(request));
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
 
-        return ResponseEntity.ok(userService.getMe(request));
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") int id){
+        var response = userService.findUserById(id);
+           return  errorHandler(response);
 
     }
 
@@ -40,14 +43,44 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(){
 
-        return ResponseEntity.ok(userService.getAllUsers());
+        var response = userService.getAllUsers();
+        if(response.size()!=0){
+            return ResponseEntity.ok(response);
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+
+
 
     }
-
-
 
     @PutMapping("")
-    public ResponseEntity<UserDto> updateProfile(@RequestBody UserDto userDto, HttpServletRequest request){
+    public ResponseEntity<User> updateProfile(@RequestBody UserDto userDto, HttpServletRequest request){
         return ResponseEntity.ok(userService.updateProfile(userDto, request));
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUserById(@RequestBody UserDto userDto, @PathVariable("id") int id){
+        var response = userService.updateUserById(userDto, id);
+        return errorHandler(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable("id") int id){
+        return ResponseEntity.ok(userService.deleteUserById(id));
+    }
+
+
+    public ResponseEntity<UserDto> errorHandler (UserDto response){
+        if(response != null){
+            return ResponseEntity.ok(response);
+        }
+        else
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
