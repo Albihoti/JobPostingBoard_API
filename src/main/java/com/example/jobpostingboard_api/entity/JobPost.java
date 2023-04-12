@@ -1,6 +1,10 @@
 package com.example.jobpostingboard_api.entity;
 import com.example.jobpostingboard_api.enums.JobStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,10 +32,9 @@ public class JobPost{
     @Column(name = "jobStatus")
     private JobStatus status;
 
-    @Column(name = "startDate")
-    private Date startDate;
-    @Column(name = "endDate")
-    private Date endDate;
+    @Column
+    private String endDate;
+
 
 
     @OneToMany(mappedBy = "jobPost")
@@ -96,22 +99,6 @@ public class JobPost{
         this.salary = salary;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     public JobStatus getStatus() {
         return status;
     }
@@ -120,5 +107,40 @@ public class JobPost{
         this.status = status;
     }
 
+
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+
+
+    public Set<Application> getJobApplications() {
+        return jobApplications;
+    }
+
+    public void setJobApplications(Set<Application> jobApplications) {
+        this.jobApplications = jobApplications;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 }

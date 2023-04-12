@@ -50,4 +50,9 @@ public class CategoryService {
             return "Could not delete category!";
         }
     }
+
+
+    public Category getCategoryByName(String name){
+        return categoryRepository.findByname(name);
+    }
 }

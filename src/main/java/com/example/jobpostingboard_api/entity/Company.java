@@ -13,7 +13,7 @@ public class Company {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "userName")
+    @Column(name = "userName", unique = true)
     private String userName;
 
     @Column(name = "email")

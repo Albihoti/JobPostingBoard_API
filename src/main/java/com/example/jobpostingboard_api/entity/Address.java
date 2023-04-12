@@ -14,6 +14,10 @@ public class Address {
     private String zipCode;
 
 
+    @OneToOne
+    private Company company;
+
+
     public int getId() {
         return id;
     }

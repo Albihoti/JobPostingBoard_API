@@ -69,8 +69,14 @@ public class CompanyService {
 
     public String deleteCompanyById(int id) {
         var company = getCompanyById(id);
+        company.setAddress(null);
         companyRepository.delete(company);
         return "Company deleted succesfully";
 
+    }
+
+
+    public Company getCompanyByUserName(String username){
+        return companyRepository.findByUserName(username);
     }
 }
