@@ -3,8 +3,10 @@ package com.example.jobpostingboard_api.service;
 
 import com.example.jobpostingboard_api.dto.JobPostDto;
 import com.example.jobpostingboard_api.entity.JobPost;
+import com.example.jobpostingboard_api.enums.JobStatus;
 import com.example.jobpostingboard_api.repository.JobPostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -47,4 +49,12 @@ public class JobPostService {
 
     public JobPost getJobpost(int id){
         return jobPostRepository.findById(id).orElse(null);}
+
+
+    @Scheduled(cron = "0 0 */48 * * ?")
+    public void deleteJobPost(){
+       var jobPost = jobPostRepository.findJobPostsByStatus(JobStatus.EXPIRED).orElse(null);
+       jobPostRepository.delete(jobPost);
+
+    }
 }

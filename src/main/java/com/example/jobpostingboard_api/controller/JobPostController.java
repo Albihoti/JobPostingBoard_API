@@ -7,6 +7,7 @@ import com.example.jobpostingboard_api.entity.JobPost;
 import com.example.jobpostingboard_api.service.JobPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,4 +35,7 @@ public class JobPostController {
         return ResponseEntity.ok(jobPostService.getAll());
 
     }
+
+
+
 }
