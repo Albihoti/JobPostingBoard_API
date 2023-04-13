@@ -43,4 +43,8 @@ public class JobPostService {
     public List<JobPost>    getAll() {
        return jobPostRepository.findAll();
     }
+
+
+    public JobPost getJobpost(int id){
+        return jobPostRepository.findById(id).orElse(null);}
 }

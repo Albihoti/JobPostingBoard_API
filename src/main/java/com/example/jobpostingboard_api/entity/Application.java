@@ -19,7 +19,7 @@ public class Application {
     @JoinColumn(name = "job_post_id")
     private JobPost jobPost;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -55,4 +55,19 @@ public class Application {
         this.link = link;
     }
 
+    public JobPost getJobPost() {
+        return jobPost;
+    }
+
+    public void setJobPost(JobPost jobPost) {
+        this.jobPost = jobPost;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
