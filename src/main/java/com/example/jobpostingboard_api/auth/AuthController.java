@@ -1,7 +1,9 @@
 package com.example.jobpostingboard_api.auth;
 
 
+import com.example.jobpostingboard_api.dto.PasswordResetDto;
 import com.example.jobpostingboard_api.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,17 @@ public class AuthController {
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request){
 
         return ResponseEntity.ok(authenticationService.login(request));
+    }
+
+
+    @PostMapping("/resetPassword")
+    public ResponseEntity<String> resetPassword(HttpServletRequest request, @RequestBody PasswordResetDto passwordResetDto){
+        return ResponseEntity.ok(authenticationService.resetPassword(request, passwordResetDto));
+    }
+
+    @PostMapping("/forgotPassword")
+    public ResponseEntity<String> forgotPassword(@RequestBody PasswordResetDto passwordResetDto){
+        return ResponseEntity.ok(authenticationService.forgotPassword(passwordResetDto));
     }
 
 
