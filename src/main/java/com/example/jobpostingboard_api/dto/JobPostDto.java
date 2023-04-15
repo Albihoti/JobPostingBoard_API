@@ -11,7 +11,6 @@ public class JobPostDto {
 
     private String description;
 
-
     private String location;
 
     private String salary;
@@ -19,11 +18,11 @@ public class JobPostDto {
     private JobStatus status;
 
 
+
     private String endDate;
 
-    private String company;
-
     private String category;
+    private String companyName;
 
 
 
@@ -77,12 +76,12 @@ public class JobPostDto {
         this.endDate = endDate;
     }
 
-    public String getCompany() {
-        return company;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getCategory() {
