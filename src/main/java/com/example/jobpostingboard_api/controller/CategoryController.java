@@ -26,7 +26,7 @@ public class CategoryController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Category>> getAllCategories(){
-        return ResponseEntity.ok(categoryService.getall());
+        return ResponseEntity.ok(categoryService.getAll());
     }
 
     @GetMapping("/{id}")
@@ -42,7 +42,11 @@ public class CategoryController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable("id") int id){
-        return ResponseEntity.ok(categoryService.deleteById(id));
+        var result = categoryService.deleteById(id);
+        if(result!=null){
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

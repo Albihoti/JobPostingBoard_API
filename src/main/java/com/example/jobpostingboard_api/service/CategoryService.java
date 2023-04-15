@@ -24,7 +24,7 @@ public class CategoryService {
 
     }
 
-    public List<Category> getall() {
+    public List<Category> getAll() {
         return categoryRepository.findAll();
     }
 
@@ -43,12 +43,14 @@ public class CategoryService {
     }
 
     public String deleteById(int id) {
-        try{
-            categoryRepository.deleteById(id);
-            return "Deleted Succesfully";
-        }catch (Exception e){
-            return "Could not delete category!";
-        }
+      var result = getById(id);
+      if(result!=null){
+          categoryRepository.deleteById(id);
+          return "Category deleted succesfully";
+      }
+      else{
+          return null;
+      }
     }
 
 
